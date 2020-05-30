@@ -28,7 +28,7 @@ public class UserDao {
     }
 
     public User findByUserId(String userId) {
-        String sql = "SELECT userId, password, name, email FROM USERS WHERE userid=?";
+        String sql = "SELECT userId, password, name, email FROM USERS WHERE userId=?";
 
         RowMapper<User> rm = new RowMapper<User>() {
             @Override

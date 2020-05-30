@@ -96,7 +96,7 @@ public class UserController extends AbstractNewController {
         User updateUser = new User(request.getParameter("userId"), request.getParameter("password"), request.getParameter("name"),
                 request.getParameter("email"));
         log.debug("Update User : {}", updateUser);
-        user.update(updateUser);
+        userDao.update(updateUser);
         return jspView("redirect:/");
     }
 
