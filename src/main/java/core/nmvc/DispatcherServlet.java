@@ -27,10 +27,14 @@ public class DispatcherServlet extends HttpServlet {
         AnnotationHandlerMapping ahm = new AnnotationHandlerMapping("next.controller");
         ahm.initialize();
         mappings.add(ahm);
+        logger.debug("Annotation Mapping init completed");
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        String requestUri = req.getRequestURI();
+        logger.debug("Method : {}, Request URI : {}", req.getMethod(), requestUri);
+
         Object handler = getHandler(req);
         if (handler == null) {
             throw new IllegalArgumentException("존재하지 않는 URL입니다.");
@@ -46,7 +50,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private Object getHandler(HttpServletRequest request) {
-        for (HandlerMapping handlerMapping: mappings) {
+        for (HandlerMapping handlerMapping : mappings) {
             Object handler = handlerMapping.getHandler(request);
             if (handler != null) return  handler;
         }

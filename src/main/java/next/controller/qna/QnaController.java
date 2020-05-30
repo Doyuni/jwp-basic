@@ -1,5 +1,6 @@
 package next.controller.qna;
 
+import core.annotation.Controller;
 import core.annotation.RequestMapping;
 import core.annotation.RequestMethod;
 import core.jdbc.DataAccessException;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+@Controller
 public class QnaController extends AbstractNewController {
     private static Logger log = LoggerFactory.getLogger(QnaController.class);
     private static QuestionDao questionDao = QuestionDao.getInstance();

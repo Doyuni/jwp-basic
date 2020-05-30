@@ -22,17 +22,17 @@ public class UserController extends AbstractNewController {
 
     private UserDao userDao = UserDao.getInstance();
 
-    @RequestMapping("/user/form")
+    @RequestMapping("/users/form")
     public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return jspView("/user/form.jsp");
     }
 
-    @RequestMapping("/user/loginForm")
+    @RequestMapping("/users/loginForm")
     public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return jspView("/user/login.jsp");
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/create", method = RequestMethod.POST)
     public ModelAndView create(HttpServletRequest request, HttpServletResponse response) {
         User user = new User(request.getParameter("userId"), request.getParameter("password"),
                 request.getParameter("name"), request.getParameter("email"));
@@ -70,11 +70,11 @@ public class UserController extends AbstractNewController {
         }
     }
 
-    @RequestMapping("/user/logout")
+    @RequestMapping("/users/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         session.removeAttribute("user");
-        return jspView("redirect:/qna/list");
+        return jspView("redirect:/");
     }
 
     @RequestMapping("/users/profile")
