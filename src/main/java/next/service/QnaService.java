@@ -4,25 +4,21 @@ import java.util.List;
 
 import next.CannotDeleteException;
 import next.dao.AnswerDao;
+import next.dao.JdbcAnswerDao;
+import next.dao.JdbcQuestionDao;
 import next.dao.QuestionDao;
 import next.model.Answer;
 import next.model.Question;
 import next.model.User;
 
 public class QnaService {
-    private static QnaService qnaService;
 
-    private QuestionDao questionDao = QuestionDao.getInstance();
-    private AnswerDao answerDao = AnswerDao.getInstance();
+    private QuestionDao questionDao;
+    private AnswerDao answerDao;
 
-    private QnaService() {
-    }
-
-    public static QnaService getInstance() {
-        if (qnaService == null) {
-            qnaService = new QnaService();
-        }
-        return qnaService;
+    public QnaService(QuestionDao questionDao, AnswerDao answerDao) {
+        this.questionDao = questionDao;
+        this.answerDao = answerDao;
     }
 
     public Question findById(long questionId) {

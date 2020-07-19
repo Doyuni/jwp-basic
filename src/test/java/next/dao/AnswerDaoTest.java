@@ -14,20 +14,20 @@ import core.jdbc.ConnectionManager;
 
 public class AnswerDaoTest {
     private static final Logger log = LoggerFactory.getLogger(AnswerDaoTest.class);
-
+    private AnswerDao answerDao;
     @Before
     public void setup() {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource("jwp.sql"));
         DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
+        answerDao = new JdbcAnswerDao();
     }
 
     @Test
     public void addAnswer() throws Exception {
         long questionId = 1L;
         Answer expected = new Answer("javajigi", "answer contents", questionId);
-        AnswerDao dut = AnswerDao.getInstance();
-        Answer answer = dut.insert(expected);
+        Answer answer = answerDao.insert(expected);
         log.debug("Answer : {}", answer);
     }
 }
